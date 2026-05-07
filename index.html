@@ -1,68 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Niranjan's Portfolio</title>
-        <meta charset="UTF-8">
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
-    <div class="container">
-        <a class="navbar-brand fw-semibold" href="#">Niranjan's Portfolio</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="" target="_blank" rel="noopener noreferrer">
-                        <i class="bi bi-github me-1"></i>GitHub
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.linkedin.com/in/niranjanlaks/" target="_blank" rel="noopener noreferrer">
-                        <i class="bi bi-linkedin me-1"></i>LinkedIn
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mailto:Niranjan.Lakshminarasimhan@warwick.ac.uk">
-                        <i class="bi bi-envelope-fill me-1"></i>Email
-                    </a>
-                </li>
-            </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Niranjan Lakshminarasimhan | Portfolio</title>
+  <meta name="description" content="Portfolio of Niranjan Lakshminarasimhan, Computer Science student at the University of Warwick focused on AI, machine learning, data science, robotics, and software engineering." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --text: #eef2ff;
+      --muted: #aab4d4;
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --light-bg: #f7f8fc;
+      --dark-text: #111827;
+    }
+
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--dark-text);
+      background: var(--light-bg);
+    }
+
+    .navbar {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.88) !important;
+    }
+
+    .navbar-brand { letter-spacing: -0.03em; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.55), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.35), transparent 30%),
+        linear-gradient(135deg, #070b16 0%, #111936 55%, #0b1020 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: #dbeafe;
+      border-radius: 999px;
+      padding: .55rem .9rem;
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      letter-spacing: -0.075em;
+      line-height: .92;
+      font-weight: 800;
+    }
+
+    .hero .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+    }
+
+    .btn-gradient {
+      color: white;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 18px 50px rgba(124, 58, 237, .32);
+    }
+
+    .btn-gradient:hover { color: white; transform: translateY(-1px); }
+
+    .stat-card, .glass-card {
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 1.5rem;
+      box-shadow: 0 24px 80px rgba(0,0,0,.18);
+    }
+
+    .section-title {
+      letter-spacing: -0.045em;
+      font-weight: 800;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+    }
+
+    .project-card, .experience-card {
+      border: 0;
+      border-radius: 1.5rem;
+      box-shadow: 0 18px 55px rgba(15, 23, 42, .08);
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .project-card::before, .experience-card::before {
+      content: "";
+      display: block;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4338ca;
+      padding: .45rem .75rem;
+      font-weight: 600;
+      font-size: .85rem;
+      margin: .25rem;
+    }
+
+    .timeline-date {
+      color: #64748b;
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    .icon-bubble {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: inline-grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(124, 58, 237, .14), rgba(6, 182, 212, .16));
+      color: var(--accent);
+      font-size: 1.25rem;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #111827, #1e1b4b);
+      color: white;
+      border-radius: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      right: -120px;
+      top: -120px;
+      background: rgba(6, 182, 212, .22);
+    }
+
+    footer { background: #070b16; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding: 6rem 0 4rem; }
+      .display-6 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg border-bottom sticky-top">
+    <div class="container py-2">
+      <a class="navbar-brand fw-bold" href="#">Niranjan L.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.linkedin.com/in/niranjanlaks/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin me-1"></i>LinkedIn</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-dark ms-lg-2" href="mailto:niranjanl0904@gmail.com"><i class="bi bi-envelope-fill me-1"></i>Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-content">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-8">
+          <div class="eyebrow"><i class="bi bi-stars"></i> Computer Science student at the University of Warwick</div>
+          <h1>Building AI, data, and software projects that solve real problems.</h1>
+          <p class="lead mt-4">
+            I’m Niranjan Lakshminarasimhan, a motivated CS student with foundations in data science, machine learning, robotics, and full-stack problem solving. I’m seeking summer internship opportunities in finance, data, or software engineering.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="#projects" class="btn btn-gradient btn-lg px-4">View Projects</a>
+            <a href="mailto:niranjanl0904@gmail.com" class="btn btn-outline-light btn-lg px-4">Email Me</a>
+          </div>
         </div>
-    </div>
-</nav>
-        <section class="py-5 text-center">
-    <div class="container">
-        <h1 class="fw-bold display-5">Hi, I’m Niranjan.</h1>
-        <p class="lead mt-3">
-            Computer Science student focused on building clean, scalable web applications.
-        </p>
-        <p class="text-muted">
-            I care about performance and clarity.
-        </p>
-        <div class="mt-4">
-            <a href="#projects" class="btn btn-dark btn-lg me-2">View Projects</a>
-            <a href="mailto:your@email.com" class="btn btn-outline-dark btn-lg">Contact Me</a>
+        <div class="col-lg-4">
+          <div class="glass-card p-4">
+            <p class="text-uppercase small fw-bold text-info mb-3">Highlights</p>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="stat-card p-3 h-100">
+                  <h3 class="fw-bold mb-0">20%</h3>
+                  <small class="text-white-50">Improved image-text alignment</small>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-card p-3 h-100">
+                  <h3 class="fw-bold mb-0">80%+</h3>
+                  <small class="text-white-50">Prototype reliability / model benchmark accuracy</small>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-card p-3 h-100">
+                  <h3 class="fw-bold mb-0">150+</h3>
+                  <small class="text-white-50">Pages of technical documentation</small>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-card p-3 h-100">
+                  <h3 class="fw-bold mb-0">A*AAA</h3>
+                  <small class="text-white-50">A-level results</small>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</section>
-        <section class="py-5 bg-light">
-    <div class="container">
-        <h2 class="fw-semibold mb-4">About Me</h2>
-        <p class="fs-5">
-            I’m a Computer Science student at the University of Warwick with a strong interest in
-            full-stack development and systems that don’t fall apart under pressure.
-        </p>
-        <p class="text-muted">
-            I enjoy breaking problems down to first principles, writing readable code,
-            and fixing things that are inefficient or poorly designed.
-        </p>
+  </header>
+
+  <main>
+    <section id="about" class="py-5">
+      <div class="container py-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-5">
+            <p class="section-kicker">About</p>
+            <h2 class="section-title display-6">Technical, analytical, and delivery-focused.</h2>
+          </div>
+          <div class="col-lg-7">
+            <p class="fs-5 text-secondary mb-3">
+              I enjoy applying technical and analytical skills to practical challenges, from predictive modelling and computer vision to AI-powered education tools and hardware-software prototypes.
+            </p>
+            <p class="fs-5 text-secondary mb-0">
+              My project experience includes working in teams, presenting to technical panels, iterating with clients, and using agile workflows to deliver under deadlines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="py-5 bg-white">
+      <div class="container py-4">
+        <div class="text-center mb-5">
+          <p class="section-kicker">Projects</p>
+          <h2 class="section-title display-6">Selected work</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="card project-card">
+              <div class="card-body p-4">
+                <div class="icon-bubble mb-3"><i class="bi bi-activity"></i></div>
+                <h3 class="h5 fw-bold">Fitness Tracker</h3>
+                <p class="text-secondary">A multi-screen PyQt5 app with login, signup, quiz profiling, database storage, weekly predictions, and visual progress charts.</p>
+                <ul class="text-secondary small mb-0">
+                  <li>Handled 100+ workout and nutrition entries</li>
+                  <li>Used regression models for personalised workout plans</li>
+                  <li>Produced 150+ pages of structured documentation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card project-card">
+              <div class="card-body p-4">
+                <div class="icon-bubble mb-3"><i class="bi bi-camera-fill"></i></div>
+                <h3 class="h5 fw-bold">AI Focus Tracker</h3>
+                <p class="text-secondary">Built during a Teens in AI techathon to improve student engagement under the UN Quality Education goal.</p>
+                <ul class="text-secondary small mb-0">
+                  <li>Tracked focus using computer vision</li>
+                  <li>Generated missed-lesson transcripts</li>
+                  <li>Presented to a panel of six AI experts</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card project-card">
+              <div class="card-body p-4">
+                <div class="icon-bubble mb-3"><i class="bi bi-robot"></i></div>
+                <h3 class="h5 fw-bold">Secure Message Prototype</h3>
+                <p class="text-secondary">Industrial Cadets Gold project with Ultra Cyber, presented at UCL’s Mechanical Engineering Department.</p>
+                <ul class="text-secondary small mb-0">
+                  <li>Delivered through 10+ design iterations</li>
+                  <li>Integrated hardware and software components</li>
+                  <li>Won Most Innovative Project</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="py-5">
+      <div class="container py-4">
+        <div class="text-center mb-5">
+          <p class="section-kicker">Experience</p>
+          <h2 class="section-title display-6">Hands-on technical experience</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="card experience-card">
+              <div class="card-body p-4">
+                <p class="timeline-date">July 2024 · Eton College</p>
+                <h3 class="h5 fw-bold">AI & ML Summer School</h3>
+                <p class="text-secondary">Completed an intensive programme covering neural networks, computer vision, and LLMs, building models from scratch and applying them to mini-projects.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card experience-card">
+              <div class="card-body p-4">
+                <p class="timeline-date">Oct 2023 – May 2024 · Ultra Cyber</p>
+                <h3 class="h5 fw-bold">Industrial Cadets Gold Project</h3>
+                <p class="text-secondary">Led hardware-software integration across weekly agile sprints for a working physical-message security prototype.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card experience-card">
+              <div class="card-body p-4">
+                <p class="timeline-date">March 2024 · Teens in AI</p>
+                <h3 class="h5 fw-bold">AI Techathon</h3>
+                <p class="text-secondary">Collaborated with mentors to prototype a responsible AI education tool, exploring ethics, transparency, scalability, and inclusive design.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-5 bg-white">
+      <div class="container py-4">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-4">
+            <p class="section-kicker">Skills</p>
+            <h2 class="section-title display-6">Tools and strengths</h2>
+            <p class="text-secondary fs-5">A mix of programming, data science, machine learning, robotics, and project delivery.</p>
+          </div>
+          <div class="col-lg-8">
+            <div class="mb-4">
+              <span class="tag">Python</span>
+              <span class="tag">Java</span>
+              <span class="tag">C++</span>
+              <span class="tag">SQL</span>
+              <span class="tag">PyQt5</span>
+              <span class="tag">pandas</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">Regression Models</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">PoseNet</span>
+              <span class="tag">Arduino</span>
+              <span class="tag">Nvidia Jetson Nano</span>
+              <span class="tag">Unit Testing</span>
+              <span class="tag">Basic API Integration</span>
+              <span class="tag">Agile Sprints</span>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-4 bg-light rounded-4 h-100">
+                  <h3 class="h6 fw-bold"><i class="bi bi-trophy-fill text-warning me-2"></i>Awards</h3>
+                  <p class="text-secondary mb-0">Industrial Cadets Gold Most Innovative Project, British Physics Challenge Bronze I, UKMT Mathematics Challenge Silver.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-4 bg-light rounded-4 h-100">
+                  <h3 class="h6 fw-bold"><i class="bi bi-mortarboard-fill text-primary me-2"></i>Education</h3>
+                  <p class="text-secondary mb-0">Computer Science at the University of Warwick. A-levels: A*AAA in Mathematics, Further Mathematics, Computer Science, and Physics.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5">
+      <div class="container py-4">
+        <div class="cta p-5">
+          <div class="row align-items-center position-relative" style="z-index: 1;">
+            <div class="col-lg-8">
+              <p class="text-info fw-bold text-uppercase small mb-2">Open to summer internships</p>
+              <h2 class="fw-bold display-6 mb-3">Interested in data, finance, AI, or software engineering roles.</h2>
+              <p class="text-white-50 fs-5 mb-lg-0">I’m keen to contribute to impactful technology-driven solutions and keep building practical, scalable systems.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+              <a class="btn btn-light btn-lg px-4" href="mailto:niranjanl0904@gmail.com">Get in touch</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <p class="mb-0">© 2026 Niranjan Lakshminarasimhan</p>
+      <div class="d-flex gap-3">
+        <a class="text-white-50" href="https://www.linkedin.com/in/niranjanlaks/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+        <a class="text-white-50" href="mailto:niranjanl0904@gmail.com"><i class="bi bi-envelope-fill"></i></a>
+      </div>
     </div>
-</section>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
